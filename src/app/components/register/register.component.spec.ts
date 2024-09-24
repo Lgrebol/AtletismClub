@@ -16,8 +16,13 @@ describe('RegisterComponent', () => {
     fixture = TestBed.createComponent(RegisterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    compiled=fixture.nativeElement as HTMLElement;
+    compiled = fixture.nativeElement as HTMLElement;
   });
+
+  // Updated function to get the nth <label> across all sections
+  function getNthLabel(index: number) {
+    return compiled.querySelectorAll('label')[index];
+  }
 
   it('should create', () => {
     expect(component).toBeTruthy();
@@ -27,7 +32,16 @@ describe('RegisterComponent', () => {
     expect(compiled.querySelector('h1')?.textContent).toBe('Inscripció proves atletisme');
   });
 
-  it('should have the subtitle Dades identificatives', () => {
-    expect(compiled.querySelector('h2')?.textContent).toBe('Dades identificatives');
+  it('should have the subtitle Dades identificatives inside the first section', () => {
+    const sectionTitle = compiled.querySelector('section h1')?.textContent;
+    expect(sectionTitle).toBe('Dades identificatives');
+  });
+
+  it('should have the labels: DNI, Codi de federat, Nom i cognoms, Telèfon, Email', () => {
+    expect(getNthLabel(0)?.textContent).toBe("DNI");
+    expect(getNthLabel(1)?.textContent).toBe("Codi de federat");
+    expect(getNthLabel(2)?.textContent).toBe("Nom i cognoms");
+    expect(getNthLabel(3)?.textContent).toBe("Telèfon");
+    expect(getNthLabel(4)?.textContent).toBe("Email");
   });
 });
