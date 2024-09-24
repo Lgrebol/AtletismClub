@@ -24,6 +24,10 @@ describe('RegisterComponent', () => {
   });
 
   it('should have the title Inscripció Proves Atletisme', () => {
-    expect(compiled.querySelector('h1')?.textContent).toBe('Inscripció Proves Atletisme');
-});
+    expect(compiled.querySelector('h1')?.textContent).toBe('Inscripció proves atletisme');
+  });
+
+  it('should have the subtitle Dades identificatives', () => {
+    expect(compiled.querySelector('h2')?.textContent).toBe('Dades identificatives');
+  });
 });
