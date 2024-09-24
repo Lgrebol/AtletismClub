@@ -19,7 +19,6 @@ describe('RegisterComponent', () => {
     compiled = fixture.nativeElement as HTMLElement;
   });
 
-  // Updated function to get the nth <label> across all sections
   function getNthLabel(index: number) {
     return compiled.querySelectorAll('label')[index];
   }
@@ -44,4 +43,11 @@ describe('RegisterComponent', () => {
     expect(getNthLabel(3)?.textContent).toBe("Telèfon");
     expect(getNthLabel(4)?.textContent).toBe("Email");
   });
+
+  it('should have the subtitle Inscripció inside the second section', () => {
+    const secondSection = compiled.querySelectorAll('section')[1];
+    const sectionTitle = secondSection.querySelector('h1')?.textContent;  
+    expect(sectionTitle).toBe('Inscripció');
+  });
+  
 });
