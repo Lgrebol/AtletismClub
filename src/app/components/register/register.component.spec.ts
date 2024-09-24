@@ -51,13 +51,11 @@ describe('RegisterComponent', () => {
   });
 
   it('should have the labels: 100m llisos, 200m llisos, 400m llisos, 800m llisos, 1000m llisos', () => {
-    const secondSection = compiled.querySelectorAll('section')[1];
-    const labels = secondSection.querySelectorAll('label');
-    expect(labels[0]?.textContent).toBe("100m llisos");
-    expect(labels[1]?.textContent).toBe("200m llisos");
-    expect(labels[2]?.textContent).toBe("400m llisos");
-    expect(labels[3]?.textContent).toBe("800m llisos");
-    expect(labels[4]?.textContent).toBe("1000m llisos");
+    expect(getNthLabel(5)?.textContent).toBe("100m llisos");
+    expect(getNthLabel(6)?.textContent).toBe("200m llisos");
+    expect(getNthLabel(7)?.textContent).toBe("400m llisos");
+    expect(getNthLabel(8)?.textContent).toBe("800m llisos");
+    expect(getNthLabel(9)?.textContent).toBe("1000m llisos");
   });
 
   it('Has button', () => {
