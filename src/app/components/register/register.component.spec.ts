@@ -49,5 +49,16 @@ describe('RegisterComponent', () => {
     const sectionTitle = secondSection.querySelector('h1')?.textContent;  
     expect(sectionTitle).toBe('Inscripció');
   });
+
+  it('should have the labels: 100m llisos, 200m llisos, 400m llisos, 800m llisos, 1000m llisos', () => {
+    const secondSection = compiled.querySelectorAll('section')[1];
+    const labels = secondSection.querySelectorAll('label');
+    expect(labels[0]?.textContent).toBe("100m llisos");
+    expect(labels[1]?.textContent).toBe("200m llisos");
+    expect(labels[2]?.textContent).toBe("400m llisos");
+    expect(labels[3]?.textContent).toBe("800m llisos");
+    expect(labels[4]?.textContent).toBe("1000m llisos");
+  });
+  
   
 });
