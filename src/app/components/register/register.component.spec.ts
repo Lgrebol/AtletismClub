@@ -59,6 +59,8 @@ describe('RegisterComponent', () => {
     expect(labels[3]?.textContent).toBe("800m llisos");
     expect(labels[4]?.textContent).toBe("1000m llisos");
   });
-  
-  
+
+  it('Has button', () => {
+    expect(compiled.querySelector("button")).toBeTruthy();
+  });
 });
