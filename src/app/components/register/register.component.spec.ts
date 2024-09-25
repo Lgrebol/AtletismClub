@@ -63,4 +63,13 @@ describe('RegisterComponent', () => {
     expect(sumbitButton).toBeTruthy();
     expect(sumbitButton?.textContent).toBe('Inscripció');
   });
+
+  it('should append the letter "Z" to the DNI field after entering 8 digits', () => {
+    const dniInput = compiled.querySelector('input[name="dni"]') as HTMLInputElement;
+    dniInput.value = '12345678';
+    dniInput.dispatchEvent(new Event('input'));
+    fixture.detectChanges();
+    
+    expect(dniInput.value).toBe('12345678Z');
+ });
 });
