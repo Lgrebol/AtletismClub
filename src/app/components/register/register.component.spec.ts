@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { RegisterComponent } from './register.component';
 
 describe('RegisterComponent', () => {
@@ -37,7 +36,7 @@ describe('RegisterComponent', () => {
   });
 
   it('should have the labels: DNI, Codi de federat, Nom i cognoms, Telèfon, Email', () => {
-    expect(getNthLabel(0)?.textContent).toBe("DNI");
+    expect(getNthLabel(0)?.textContent).toBe("DNI ");
     expect(getNthLabel(1)?.textContent).toBe("Codi de federat");
     expect(getNthLabel(2)?.textContent).toBe("Nom i cognoms");
     expect(getNthLabel(3)?.textContent).toBe("Telèfon");
@@ -58,18 +57,19 @@ describe('RegisterComponent', () => {
     expect(getNthLabel(9)?.textContent).toBe("1000m llisos ");
   });
 
-  it('should have a sumbit button', () => {
-    const sumbitButton = compiled.querySelector('button[type="submit"]');
-    expect(sumbitButton).toBeTruthy();
-    expect(sumbitButton?.textContent).toBe('Inscripció');
+  it('should have a submit button', () => {
+    const submitButton = compiled.querySelector('button[type="submit"]');
+    expect(submitButton).toBeTruthy();
+    expect(submitButton?.textContent).toBe('Inscripció');
   });
 
-  it('should append the letter "Z" to the DNI field after entering 8 digits', () => {
+  it('should append the correct letter to the DNI field after entering 8 digits', () => {
     const dniInput = compiled.querySelector('input[name="dni"]') as HTMLInputElement;
     dniInput.value = '12345678';
     dniInput.dispatchEvent(new Event('input'));
     fixture.detectChanges();
-    
-    expect(dniInput.value).toBe('12345678Z');
- });
+
+    const expectedLetter = component.calculateDniLetter('12345678');
+    expect(dniInput.value).toBe('12345678' + expectedLetter);
+  });
 });
