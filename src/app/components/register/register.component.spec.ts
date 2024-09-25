@@ -72,4 +72,9 @@ describe('RegisterComponent', () => {
     const expectedLetter = component.calculateDniLetter('12345678');
     expect(dniInput.value).toBe('12345678' + expectedLetter);
   });
+
+  it('should disable the submit button if any field is empty', () => {
+    const submitButton = compiled.querySelector('button[type="submit"]') as HTMLButtonElement;
+    expect(submitButton?.disabled).toBe(true);
+});
 });
