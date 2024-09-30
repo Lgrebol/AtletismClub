@@ -77,4 +77,38 @@ describe('RegisterComponent', () => {
     const submitButton = compiled.querySelector('button[type="submit"]') as HTMLButtonElement;
     expect(submitButton?.disabled).toBe(true);
 });
+
+it('should disable the other checkboxes if the total is more than 1200', () => {
+  const checkboxes = compiled.querySelectorAll('input[type="checkbox"]') as NodeListOf<HTMLInputElement>;
+
+  // Select the first 100m and 200m races (total 300m)
+  checkboxes[0].checked = true;
+  checkboxes[0].dispatchEvent(new Event('change'));
+  checkboxes[1].checked = true;
+  checkboxes[1].dispatchEvent(new Event('change'));
+  fixture.detectChanges();
+
+  checkboxes.forEach(checkbox => {
+    expect(checkbox.disabled).toBe(false);
+  });
+
+  checkboxes[4].checked = true;
+  checkboxes[4].dispatchEvent(new Event('change'));
+  fixture.detectChanges();
+
+  checkboxes.forEach((checkbox, index) => {
+    if (!checkbox.checked) {
+      expect(checkbox.disabled).toBe(true);
+    }
+  });
+
+  checkboxes[4].checked = false;
+  checkboxes[4].dispatchEvent(new Event('change'));
+  fixture.detectChanges();
+
+  checkboxes.forEach(checkbox => {
+    expect(checkbox.disabled).toBe(false);
+  });
+});
+
 });

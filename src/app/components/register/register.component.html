@@ -13,20 +13,21 @@
 <section>
     <h1>Inscripció</h1>
     <label>100m llisos
-        <input type="checkbox">
+      <input type="checkbox" name="100m" (change)="onDistanceChange($event, '100m', 100)">
     </label>
     <label>200m llisos
-        <input type="checkbox">
+      <input type="checkbox" name="200m" (change)="onDistanceChange($event, '200m', 200)">
     </label>
     <label>400m llisos
-        <input type="checkbox">
+      <input type="checkbox" name="400m" (change)="onDistanceChange($event, '400m', 400)">
     </label>
     <label>800m llisos
-        <input type="checkbox">
+      <input type="checkbox" name="800m" (change)="onDistanceChange($event, '800m', 800)">
     </label>
     <label>1000m llisos
-        <input type="checkbox">
+      <input type="checkbox" name="1000m" (change)="onDistanceChange($event, '1000m', 1000)">
     </label>
-</section>
-
-<button type="submit" [disabled]="isFormInvalid()">Inscripció</button>
+  </section>
+  
+  <button type="submit" [disabled]="isFormInvalid()">Inscripció</button>
+  

@@ -12,8 +12,18 @@ export class RegisterComponent {
   fullName: string = '';
   phone: string = '';
   email: string = '';
-  
   dniLetter = '';
+
+  selectedDistances: { [key: string]: boolean } = {
+    '100m': false,
+    '200m': false,
+    '400m': false,
+    '800m': false,
+    '1000m': false
+  };
+
+  totalDistance: number = 0;
+  maxDistance: number = 1200;
 
   calculateDniLetter(dniNumber: string): string {
     const dniLetters = 'TRWAGMYFPDXBNJZSQVHLCKE';
@@ -30,11 +40,32 @@ export class RegisterComponent {
       this.dniLetter = this.calculateDniLetter(dniValue);
       input.value = dniValue + this.dniLetter; 
     }
-    this.dni = input.value; // Update dni property
+    this.dni = input.value;
   }
 
-  // Method to check if any field is empty
   isFormInvalid(): boolean {
     return !this.dni || !this.federatedCode || !this.fullName || !this.phone || !this.email;
+  }
+
+  onDistanceChange(event: Event, distance: string, meters: number): void {
+    const input = event.target as HTMLInputElement;
+    this.selectedDistances[distance] = input.checked;
+
+    if (input.checked) {
+      this.totalDistance += meters;
+    } else {
+      this.totalDistance -= meters;
+    }
+    
+    this.toggleCheckboxes();
+  }
+
+  toggleCheckboxes(): void {
+    const totalSelected = this.totalDistance;
+
+    for (let distance in this.selectedDistances) {
+      const isDisabled = totalSelected > this.maxDistance && !this.selectedDistances[distance];
+      document.querySelector(`input[name="${distance}"]`)?.toggleAttribute('disabled', isDisabled);
+    }
   }
 }
